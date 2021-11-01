@@ -50,6 +50,12 @@ client.connect((err) => {
     res.send(result);
     console.log(result);
   });
+
+  app.get("/allregister/:email", async (req, res) => {
+    const email = req.params.email;
+    const result = await registerCollection.find({ email: email }).toArray();
+    res.send(result);
+  });
   //   client.close();
 });
 
