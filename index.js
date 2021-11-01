@@ -40,6 +40,12 @@ client.connect((err) => {
     console.log(result);
   });
 
+  // get all bookings
+  app.get("/allregister", async (req, res) => {
+    const result = await registerCollection.find({}).toArray();
+    res.send(result);
+    console.log(result);
+  });
   //   client.close();
 });
 
