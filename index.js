@@ -30,19 +30,23 @@ client.connect((err) => {
     const id = req.params.id;
     const result = await serviceCollection.findOne({ _id: ObjectId(id) });
     res.send(result);
-    console.log(result);
   });
   // find a single services
   app.post("/register", async (req, res) => {
     const registerInfo = req.body;
     const result = await registerCollection.insertOne(registerInfo);
     res.send(result);
-    console.log(result);
   });
 
   // get all bookings
   app.get("/allregister", async (req, res) => {
     const result = await registerCollection.find({}).toArray();
+    res.send(result);
+  });
+
+  app.delete("/remove/:id", async (req, res) => {
+    const id = req.params.id;
+    const result = await registerCollection.deleteOne({ _id: ObjectId(id) });
     res.send(result);
     console.log(result);
   });
