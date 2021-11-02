@@ -48,7 +48,6 @@ client.connect((err) => {
     const id = req.params.id;
     const result = await registerCollection.deleteOne({ _id: ObjectId(id) });
     res.send(result);
-    console.log(result);
   });
 
   app.get("/allregister/:email", async (req, res) => {
@@ -56,14 +55,19 @@ client.connect((err) => {
     const result = await registerCollection.find({ email: email }).toArray();
     res.send(result);
   });
+
   app.post("/addService", async (req, res) => {
     const newService = req.body;
     const result = await serviceCollection.insertOne(newService);
     res.send(result);
-    console.log(result);
   });
 
-// update status
+  app.get("/allregister/:id", async (req, res) => {
+    const email = req.params.id;
+    const result = await registerCollection.findOne({ _id: ObjectId(id) });
+    res.send(result);
+  });
+  // update status
   app.put("/allregister/:id", async (req, res) => {
     const id = req.params.id;
     const updateStatus = req.body;
@@ -76,7 +80,6 @@ client.connect((err) => {
     const result = await registerCollection.updateOne(find, updateDoc);
     res.json(result);
   });
-
 
   //   client.close();
 });
